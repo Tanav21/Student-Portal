@@ -2,12 +2,14 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
+// import "react-toastify/dist/ReactToastify.css";
 import Login from "./Components/Login";
 import { BrowserRouter, Route, Routes } from "react-router";
 import SignUp from "./Components/SignUp";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 import HomePage from "./Pages/HomePage";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -23,6 +25,7 @@ function App() {
           <Route exact path="/header" element={<Header />} />
         </Routes>
       </BrowserRouter>
+      <ToastContainer position="top-right" autoClose={3000} />
     </>
   );
 }

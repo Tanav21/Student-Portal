@@ -1,18 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import PageLayout from "../Pages/PageLayout";
+import { registerApi } from "../network/api";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   const navigate = useNavigate();
+
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
   const handleNavigateToLogin = () => {
     navigate("/login");
   };
 
-  const handleSubmit = (e) => {
+  const handleInput = (e) => {
+    const { id, value } = e.target;
+    setData((prev) => ({ ...prev, [id]: value }));
+    console.log(data);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add sign-up logic here
-    console.log("Form submitted");
+    console.log(data);
+    try {
+      const response = await registerApi(data);
+      if (response.status === 200) {
+        toast.success(response.data.message);
+        navigate("/dashboard");
+      } else {
+        console.log(response);
+        toast.error(response.data.message);
+      }
+    } catch (e) {
+      console.log(e);
+      toast.error(e.response?.data?.message ?? e.message);
+    }
   };
 
   return (
@@ -33,8 +59,11 @@ const SignUp = () => {
                 </label>
                 <input
                   id="name"
+                  name="name"
                   className="w-full p-3 border rounded-lg shadow-sm dark:bg-indigo-700 dark:text-gray-300 focus:scale-105 transition-transform ease-in-out duration-300"
                   type="text"
+                  value={data.name}
+                  onChange={handleInput}
                   placeholder="Enter your full name"
                   required
                 />
@@ -51,6 +80,8 @@ const SignUp = () => {
                   id="email"
                   className="w-full p-3 border rounded-lg shadow-sm dark:bg-indigo-700 dark:text-gray-300 focus:scale-105 transition-transform ease-in-out duration-300"
                   type="email"
+                  value={data.email}
+                  onChange={handleInput}
                   placeholder="Enter your email"
                   required
                 />
@@ -67,6 +98,8 @@ const SignUp = () => {
                   id="password"
                   className="w-full p-3 border rounded-lg shadow-sm dark:bg-indigo-700 dark:text-gray-300 focus:scale-105 transition-transform ease-in-out duration-300"
                   type="password"
+                  value={data.password}
+                  onChange={handleInput}
                   placeholder="Enter your password"
                   required
                 />
@@ -83,11 +116,10 @@ const SignUp = () => {
                 Forgot your password?
               </a>
 
-              <button
-                type="submit"
-                className="w-full p-3 text-lg font-semibold text-white bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg shadow-lg hover:scale-105 transition-transform ease-in-out duration-300"
-              >
-                Sign Up
+              <button class="w-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+                <span class="w-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
+                  Sign Up
+                </span>
               </button>
             </form>
 

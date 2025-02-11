@@ -6,14 +6,15 @@ import {
   FaTwitter,
   FaYoutube,
 } from "react-icons/fa";
+import { ToastContainer } from "react-toastify";
 
 const Footer = () => {
   return (
-    <div className="bg-violet-900 pt-9">
+    <div className="bg-black pt-9">
       <div className="mx-auto w-full max-w-[1166px] px-4 xl:px-0">
         <div className="flex flex-col justify-between sm:px-[18px] md:flex-row md:px-10">
           {/* Logo Section */}
-          <div className="md:w-[316px]">
+          <div className="mb-4 md:w-[316px]">
             <h1 className="text-white font-extrabold">
               <span className="text-rose-600">YOUR</span>LOGO
             </h1>
@@ -28,32 +29,42 @@ const Footer = () => {
                 {
                   icon: <FaFacebook size={36} />,
                   link: "https://www.facebook.com",
+                  color: "#1877F2",
                   alt: "Facebook",
                 },
                 {
                   icon: <FaLinkedin size={36} />,
                   link: "https://www.linkedin.com",
+                  color: "#0077B5",
                   alt: "LinkedIn",
                 },
                 {
                   icon: <FaInstagram size={36} />,
                   link: "https://www.instagram.com",
+                  color: "#C1275F",
                   alt: "Instagram",
                 },
                 {
                   icon: <FaTwitter size={36} />,
                   link: "https://www.twitter.com",
+                  color: "#1da1f2",
                   alt: "Twitter",
                 },
                 {
                   icon: <FaYoutube size={36} />,
                   link: "https://www.youtube.com",
+                  color: "#ee0f0f",
                   alt: "YouTube",
                 },
               ].map((social, index) => (
                 <a
                   key={index}
-                  className="hover:scale-110"
+                  className={`hover:scale-110`}
+                  style={
+                    social.color.startsWith("#")
+                      ? { color: social.color }
+                      : undefined
+                  }
                   target="_blank"
                   href={social.link}
                   rel="noopener noreferrer"
