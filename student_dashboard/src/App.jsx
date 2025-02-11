@@ -11,6 +11,7 @@ import Header from "./Components/Header";
 import HomePage from "./Pages/HomePage";
 import { ToastContainer } from "react-toastify";
 
+import Dashboard from "./Pages/Dashboard";
 function App() {
   const [count, setCount] = useState(0);
 
@@ -23,6 +24,8 @@ function App() {
           <Route exact path="/signup" element={<SignUp />} />
           <Route exact path="/footer" element={<Footer />} />
           <Route exact path="/header" element={<Header />} />
+          <Route exact path="/dashboard" element={<Dashboard />} />
+
         </Routes>
       </BrowserRouter>
       <ToastContainer position="top-right" autoClose={3000} />
