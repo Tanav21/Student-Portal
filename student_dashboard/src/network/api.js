@@ -30,3 +30,13 @@ export const registerApi = async (data) => {
   });
   return response;
 };
+
+export const loginApi = async (data) => {
+  // console.warn("Request:", loginDetails);
+  let response = await axios({
+    method: "post",
+    url: ENDPOINTS.login,
+    data: data,
+  });
+  return response;
+};

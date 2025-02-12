@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import PageLayout from "../Pages/PageLayout";
+import { useDispatch } from "react-redux";
+import { loginStudent } from "../redux/slices/authSlice";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
 
   const handleNavigate = () => {
     navigate("/signup");
@@ -13,6 +22,23 @@ const Login = () => {
     // Add sign-up logic here
     console.log("Form submitted");
   };
+
+  const handleInput = (e) => {
+    const { id, value } = e.target;
+    setData((prev) => ({ ...prev, [id]: value }));
+  };
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await dispatch(loginStudent(data));
+      if (response.payload.token) {
+        navigate("/dashboard");
+      }
+    } catch (e) {
+      toast.error(e.response?.data?.message ?? "Failed to Login");
+    }
+  };
+
   return (
     <PageLayout>
       <main className="flex justify-center items-center min-h-screen dark:bg-gray-900 bg-gray-100">
@@ -31,7 +57,9 @@ const Login = () => {
                 </label>
                 <input
                   id="email"
-                  className="w-full p-3 border rounded-lg shadow-sm dark:bg-indigo-700 dark:text-gray-300 focus:scale-105 transition-transform ease-in-out duration-300"
+                  className="w-full p-3 border rounded-lg shadow-sm   focus:scale-105 transition-transform ease-in-out duration-300"
+                  value={data.email}
+                  onChange={handleInput}
                   type="email"
                   placeholder="Enter your email"
                   required
@@ -47,7 +75,9 @@ const Login = () => {
                 </label>
                 <input
                   id="password"
-                  className="w-full p-3 border rounded-lg shadow-sm dark:bg-indigo-700 dark:text-gray-300 focus:scale-105 transition-transform ease-in-out duration-300"
+                  value={data.password}
+                  onChange={handleInput}
+                  className="w-full p-3 border rounded-lg shadow-sm  focus:scale-105 transition-transform ease-in-out duration-300"
                   type="password"
                   placeholder="Enter your password"
                   required
@@ -65,7 +95,10 @@ const Login = () => {
                 Forgot your password?
               </a>
 
-              <button class="w-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+              <button
+                class="w-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
+                onClick={handleLogin}
+              >
                 <span class="w-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
                   Login
                 </span>

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-// import { googleLoginApi, loginApi,registerApi } from '../../network/api'
 import { toast } from "react-toastify";
+import { loginApi } from "../../network/api";
 
 const initialState = {
   loading: false,
@@ -15,7 +15,7 @@ export const loginStudent = createAsyncThunk(
   async ({ email, password }, thunkApi) => {
     try {
       let response = await loginApi({ email: email, password: password });
-      if (response.status == 200 && response.data.status == 200) {
+      if (response.status == 200) {
         return response.data;
       } else {
         return thunkApi.rejectWithValue(
@@ -74,11 +74,11 @@ const authSlice = createSlice({
         state.loading = true;
       })
       .addCase(loginStudent.fulfilled, (state, action) => {
-        state.student = action.payload.data;
+        state.student = action.payload.payload;
         state.token = action.payload.token;
         state.loading = false;
+        state.error = null;
         toast.success(action.payload.message);
-        state.profile = action.payload.profile;
       })
       .addCase(loginStudent.rejected, (state, action) => {
         state.error = action.payload;

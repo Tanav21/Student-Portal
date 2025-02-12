@@ -47,7 +47,7 @@ const SignUp = () => {
         <section className="w-full max-w-md p-1 rounded-2xl bg-gradient-to-r from-blue-500 to-purple-500 shadow-lg m-4">
           <div className="p-6 rounded-xl bg-white dark:bg-gray-900">
             <h1 className="text-3xl font-bold text-center dark:text-gray-200 text-gray-800 mb-6">
-              Sign Up
+              Create An Account
             </h1>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
@@ -60,7 +60,7 @@ const SignUp = () => {
                 <input
                   id="name"
                   name="name"
-                  className="w-full p-3 border rounded-lg shadow-sm dark:bg-indigo-700 dark:text-gray-300 focus:scale-105 transition-transform ease-in-out duration-300"
+                  className="w-full p-3 border rounded-lg shadow-sm dark:text-gray-300 focus:scale-105 transition-transform ease-in-out duration-300"
                   type="text"
                   value={data.name}
                   onChange={handleInput}
@@ -78,7 +78,7 @@ const SignUp = () => {
                 </label>
                 <input
                   id="email"
-                  className="w-full p-3 border rounded-lg shadow-sm dark:bg-indigo-700 dark:text-gray-300 focus:scale-105 transition-transform ease-in-out duration-300"
+                  className="w-full p-3 border rounded-lg shadow-sm  dark:text-gray-300 focus:scale-105 transition-transform ease-in-out duration-300"
                   type="email"
                   value={data.email}
                   onChange={handleInput}
@@ -96,7 +96,7 @@ const SignUp = () => {
                 </label>
                 <input
                   id="password"
-                  className="w-full p-3 border rounded-lg shadow-sm dark:bg-indigo-700 dark:text-gray-300 focus:scale-105 transition-transform ease-in-out duration-300"
+                  className="w-full p-3 border rounded-lg shadow-sm  dark:text-gray-300 focus:scale-105 transition-transform ease-in-out duration-300"
                   type="password"
                   value={data.password}
                   onChange={handleInput}
@@ -104,17 +104,6 @@ const SignUp = () => {
                   required
                 />
               </div>
-
-              <a
-                className="block text-sm text-blue-400 hover:underline"
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  console.log("Forgot password clicked");
-                }}
-              >
-                Forgot your password?
-              </a>
 
               <button class="w-full relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
                 <span class="w-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
