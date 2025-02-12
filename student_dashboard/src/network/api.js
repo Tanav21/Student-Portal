@@ -40,3 +40,12 @@ export const loginApi = async (data) => {
   });
   return response;
 };
+
+export const getProfileApi = async () => {
+  // console.warn("Request:", loginDetails);
+  let response = await axios({
+    method: "get",
+    url: ENDPOINTS.getProfile,
+  });
+  return response;
+};
