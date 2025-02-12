@@ -7,12 +7,13 @@ const Header = () => {
       <div class="w-full py-3 border-b">
         <div class="flex justify-between px-20 items-center font-semibold">
           <div>
-            <h1 class="text-2xl">LOGO</h1>
+            <h1 class="text-2xl">
+              <span className="text-rose-600">YOUR</span>LOGO
+            </h1>
           </div>
           <div class="flex xl:gap-10 md:gap-8  gap-2">
             <Link to="/">Home</Link>
-            <a href="">Work</a>
-            <a href="">About</a>
+            <Link to="/about">About</Link>
             <a href="">Services</a>
             <a href="">Testimonial</a>
           </div>

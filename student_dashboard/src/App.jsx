@@ -8,7 +8,7 @@ import HomePage from "./Pages/HomePage";
 import Login from "./Components/Login";
 import SignUp from "./Components/SignUp";
 import Dashboard from "./Pages/Dashboard";
-
+import About from "./Components/About";
 function App() {
   const auth = useSelector((state) => state.auth);
 
@@ -33,6 +33,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
+              <Route path="/about" element={<About />} />
               <Route path="*" element={<Navigate to="/" />} />
             </>
           )}
