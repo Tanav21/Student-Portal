@@ -1,30 +1,55 @@
 import React, { useState, useEffect } from "react";
 import Layout from "../Components/Layout";
 import axios from "axios";
+import { getProfileApi } from "../network/api";
+import { toast } from "react-toastify";
 
 const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
-  const [profile, setProfile] = useState({ 
-    name: "", 
-    email: "", 
-    phone: "", 
-    address: "", 
-    dob: "", 
-    education: "", 
-    institution: "", 
-    course: "", 
-    year: "", 
-    skills: "", 
-    profileImage: "" 
+  const [profile, setProfile] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    dob: "",
+    degree: "",
+    institution: "",
+    course: "",
+    year: "",
+    skills: "",
+    profileImage: "",
   });
   const [updatedProfile, setUpdatedProfile] = useState(profile);
 
+  const fetchData = async () => {
+    try {
+      const response = await getProfileApi();
+      if (response.data.profile) {
+        console.log(response.data.profile);
+        const profile = response.data.profile;
+        setUpdatedProfile((prev) => ({
+          ...prev,
+          name: profile.name,
+          email: profile.email,
+          profileImage: profile.image,
+          dob: profile.dob,
+          phone: profile.dob,
+          address: profile.address,
+          degree: profile.education.degree,
+          institution: profile.education.degree,
+          course: profile.education.course,
+          year: profile.education.year,
+          skills: profile.education.skills,
+        }));
+        toast.success(response.data.message);
+      }
+    } catch (e) {
+      toast.error(e.response?.data?.message ?? "Failed to fetch data");
+    }
+  };
+
   useEffect(() => {
-    // Fetch profile data (Replace with actual API endpoint)
-    axios.get("/api/profile").then((response) => {
-      setProfile(response.data);
-      setUpdatedProfile(response.data);
-    });
+    fetchData();
   }, []);
 
   const handleChange = (e) => {
@@ -45,9 +70,9 @@ const Profile = () => {
         <h2 className="text-xl font-semibold mb-4">Profile</h2>
         <div className="space-y-4">
           <div className="flex flex-col items-center">
-            <img 
-              src={profile.profileImage || "https://via.placeholder.com/150"} 
-              alt="Profile" 
+            <img
+              src={profile.profileImage || "https://via.placeholder.com/150"}
+              alt="Profile"
               className="w-24 h-24 rounded-full border"
             />
             {isEditing && (
@@ -72,7 +97,7 @@ const Profile = () => {
                 className="w-full p-2 border rounded"
               />
             ) : (
-              <p>{profile.name}</p>
+              <p>{updatedProfile.name}</p>
             )}
           </div>
           <div>
@@ -86,7 +111,7 @@ const Profile = () => {
                 className="w-full p-2 border rounded"
               />
             ) : (
-              <p>{profile.email}</p>
+              <p>{updatedProfile.email}</p>
             )}
           </div>
           <div>
@@ -100,7 +125,7 @@ const Profile = () => {
                 className="w-full p-2 border rounded"
               />
             ) : (
-              <p>{profile.phone}</p>
+              <p>{updatedProfile.phone}</p>
             )}
           </div>
           <div>
@@ -114,7 +139,7 @@ const Profile = () => {
                 className="w-full p-2 border rounded"
               />
             ) : (
-              <p>{profile.address}</p>
+              <p>{updatedProfile.address}</p>
             )}
           </div>
           <div>
@@ -128,7 +153,7 @@ const Profile = () => {
                 className="w-full p-2 border rounded"
               />
             ) : (
-              <p>{profile.dob}</p>
+              <p>{updatedProfile.dob}</p>
             )}
           </div>
           <div>
@@ -136,13 +161,13 @@ const Profile = () => {
             {isEditing ? (
               <input
                 type="text"
-                name="education"
-                value={updatedProfile.education}
+                name="degree"
+                value={updatedProfile.degree}
                 onChange={handleChange}
                 className="w-full p-2 border rounded"
               />
             ) : (
-              <p>{profile.education}</p>
+              <p>{updatedProfile.education}</p>
             )}
           </div>
           <div>
@@ -156,7 +181,7 @@ const Profile = () => {
                 className="w-full p-2 border rounded"
               />
             ) : (
-              <p>{profile.institution}</p>
+              <p>{updatedProfile.institution}</p>
             )}
           </div>
           <div>
@@ -170,7 +195,7 @@ const Profile = () => {
                 className="w-full p-2 border rounded"
               />
             ) : (
-              <p>{profile.course}</p>
+              <p>{updatedProfile.course}</p>
             )}
           </div>
           <div>
@@ -184,7 +209,7 @@ const Profile = () => {
                 className="w-full p-2 border rounded"
               />
             ) : (
-              <p>{profile.year}</p>
+              <p>{updatedProfile.year}</p>
             )}
           </div>
           <div>
@@ -199,7 +224,7 @@ const Profile = () => {
                 placeholder="E.g., JavaScript, React, Python"
               />
             ) : (
-              <p>{profile.skills}</p>
+              <p>{updatedProfile.skills}</p>
             )}
           </div>
           <div className="flex space-x-2">

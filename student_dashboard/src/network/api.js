@@ -46,6 +46,7 @@ export const getProfileApi = async () => {
   let response = await axios({
     method: "get",
     url: ENDPOINTS.getProfile,
+    headers: commonHeaders(),
   });
   return response;
 };
