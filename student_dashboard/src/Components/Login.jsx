@@ -17,11 +17,6 @@ const Login = () => {
   const handleNavigate = () => {
     navigate("/signup");
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add sign-up logic here
-    console.log("Form submitted");
-  };
 
   const handleInput = (e) => {
     const { id, value } = e.target;

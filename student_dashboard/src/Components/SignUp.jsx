@@ -20,23 +20,19 @@ const SignUp = () => {
   const handleInput = (e) => {
     const { id, value } = e.target;
     setData((prev) => ({ ...prev, [id]: value }));
-    console.log(data);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(data);
     try {
       const response = await registerApi(data);
       if (response.status === 200) {
         toast.success(response.data.message);
         navigate("/dashboard");
       } else {
-        console.log(response);
         toast.error(response.data.message);
       }
     } catch (e) {
-      console.log(e);
       toast.error(e.response?.data?.message ?? e.message);
     }
   };

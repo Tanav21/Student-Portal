@@ -12,10 +12,6 @@ import About from "./Components/About";
 function App() {
   const auth = useSelector((state) => state.auth);
 
-  useEffect(() => {
-    console.log(auth);
-  }, [auth]);
-
   return (
     <>
       <ToastContainer position="top-right" autoClose={3000} />
