@@ -30,8 +30,8 @@ const SideBar = () => {
         </li>
         <li className="mb-4 flex items-center">
           <FaFileAlt className="mr-2" />{" "}
-          <Link to="/articles" className="hover:underline">
-            Article
+          <Link to="/edit-profile" className="hover:underline">
+            Edit Profile
           </Link>
         </li>
         <li className="mb-4 flex items-center">

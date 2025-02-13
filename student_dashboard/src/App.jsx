@@ -10,6 +10,7 @@ import SignUp from "./Components/SignUp";
 import Dashboard from "./Pages/Dashboard";
 import About from "./Components/About";
 import Profile from "./Pages/Profile";
+import EditProfile from "./Pages/EditProfile";
 function App() {
   const auth = useSelector((state) => state.auth);
 
@@ -23,6 +24,7 @@ function App() {
               {/* Authenticated Routes */}
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/edit-profile" element={<EditProfile />} />
               <Route path="*" element={<Navigate to="/dashboard" />} />
             </>
           ) : (
