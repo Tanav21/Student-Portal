@@ -36,8 +36,8 @@ const SideBar = () => {
         </li>
         <li className="mb-4 flex items-center">
           <FaUsers className="mr-2" />{" "}
-          <Link to="/users" className="hover:underline">
-            Users
+          <Link to="/courses" className="hover:underline">
+            Courses
           </Link>
         </li>
         <li className="mb-4 flex items-center">

@@ -101,9 +101,14 @@ const EditProfile = () => {
   }, []);
 
   if (isLoading) {
-    return <Layout>Loading...</Layout>;
+    return (
+      <Layout>
+        <div className="flex justify-center items-center h-screen">
+          <p className="text-lg font-semibold text-gray-500">Loading...</p>
+        </div>
+      </Layout>
+    );
   }
-
   return (
     <Layout>
       <form onSubmit={handleSave}>

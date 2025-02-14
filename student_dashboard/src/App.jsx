@@ -11,6 +11,7 @@ import Dashboard from "./Pages/Dashboard";
 import About from "./Components/About";
 import Profile from "./Pages/Profile";
 import EditProfile from "./Pages/EditProfile";
+import Courses from "./Pages/Courses";
 function App() {
   const auth = useSelector((state) => state.auth);
 
@@ -25,6 +26,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/edit-profile" element={<EditProfile />} />
+              <Route path="/courses" element={<Courses />} />
               <Route path="*" element={<Navigate to="/dashboard" />} />
             </>
           ) : (

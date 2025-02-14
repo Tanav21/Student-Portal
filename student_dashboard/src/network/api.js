@@ -63,3 +63,12 @@ export const updateProfileApi = async (id, data) => {
   });
   return response;
 };
+
+export const getCoursesApi = async () => {
+  // console.warn("Request:", loginDetails);
+  let response = await axios({
+    method: "get",
+    url: ENDPOINTS.getCourses,
+  });
+  return response;
+};
